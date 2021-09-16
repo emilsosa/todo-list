@@ -1,7 +1,5 @@
 <template>
-	<button
-		class="py-2 px-4 text-white font-semibold rounded-lg shadow-md hover:shadow-lg focus:outline-none bg-green-400 hover:bg-green-800 transition-colors duration-75 ease-in"
-	>
+	<button>
 		<slot></slot>
 	</button>
 </template>

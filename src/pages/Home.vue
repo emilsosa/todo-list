@@ -8,7 +8,7 @@
 			:errors="errors.inputText"
 		></FormInput>
 		<FormInputError :error="errors.inputText"></FormInputError>
-		<FormButton @click="onAddItem">Add!</FormButton>
+		<button class="btn btn-green" @click="onAddItem">Add!</button>
 	</div>
 	<div>
 		<TodoList :items="items"></TodoList>
@@ -24,10 +24,6 @@ import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import FormInputError from '../components/FormInputError.vue';
 
-interface AddTodoForm {
-	inputText: string
-}
-
 export default defineComponent({
 	name: 'Home',
 	components: {
@@ -39,7 +35,7 @@ export default defineComponent({
 	setup() {
 		const items = ref<string[]>([]);
 
-		const { errors, values: formValues, validate } = useForm<AddTodoForm>({
+		const { errors, values: formValues, validate } = useForm<{ inputText: string }>({
 			initialValues: {
 				inputText: ''
 			}
