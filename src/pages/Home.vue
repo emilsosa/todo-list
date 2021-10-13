@@ -1,12 +1,12 @@
 <template>
 	<div class="flex justify-center">
-		<diev class="md:container md:mx-auto px-4">
+		<div class="md:container md:mx-auto px-4">
 			<AddTodo v-model="inputText" @add-item="onAddItem" />
-			{{ errors }}
+			<ErrorList v-if="Object.keys(errors).length > 0" :errors="errors" class="md:1/5"></ErrorList>
 			<div>
 				<TodoList :items="items"></TodoList>
 			</div>
-		</diev>
+		</div>
 	</div>
 </template>
 
@@ -19,6 +19,7 @@ import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import FormInputError from '../components/FormInputError.vue';
 import AddTodo from '../components/AddTodo.vue';
+import ErrorList from '../components/ErrorList.vue';
 
 export default defineComponent({
 	name: 'Home',
@@ -28,6 +29,7 @@ export default defineComponent({
 		TodoList,
 		FormInputError,
 		AddTodo,
+		ErrorList
 	},
 	setup() {
 		const items = ref<string[]>([]);
@@ -35,7 +37,7 @@ export default defineComponent({
 		const { errors, values: formValues, validate } = useForm<{ inputText: string }>({
 			initialValues: {
 				inputText: ''
-			}
+			},
 		});
 
 		const { value: inputText, resetField: resetInputText } = useField<string>('inputText', yup.string().required().max(255), { validateOnValueUpdate: false })
